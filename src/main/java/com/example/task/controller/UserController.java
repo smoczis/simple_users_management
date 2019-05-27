@@ -3,12 +3,9 @@ package com.example.task.controller;
 import com.example.task.model.User;
 import com.example.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -45,9 +42,9 @@ public class UserController {
         service.deleteUser(id);
     }
 
-    @PutMapping("/users")
-    public ResponseEntity<User> updateUser(@RequestBody User existingUser) {
-        User newUser = service.updateUser(existingUser);
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@RequestBody User existingUser, @PathVariable Long id) {
+        User newUser = service.updateUser(existingUser, id);
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 

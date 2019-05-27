@@ -5,7 +5,10 @@ import com.example.task.model.User;
 import com.example.task.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
 
 @Service
@@ -24,8 +27,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
-        return repository.save(this.getUser(user.getId()));
+    public User updateUser(User user, Long id) {
+        user.setId(id);
+        return repository.save(user);
     }
 
     @Override
@@ -45,6 +49,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Iterable<User> searchUsers(User user) {
-        return repository.findAll(Example.of(user));
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase("name", "surname")
+                .withMatcher("name", contains().ignoreCase())
+                .withMatcher("surname", contains().ignoreCase());
+        return repository.findAll(Example.of(user, matcher));
     }
 }
