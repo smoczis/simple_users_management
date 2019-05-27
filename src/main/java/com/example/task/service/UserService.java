@@ -10,4 +10,6 @@ public interface UserService {
     Iterable<User> getAllUsers();
     void deleteUser(Long id);
     Iterable<User> searchUsers(User user);
+
+    User getUserByName(String name);
 }

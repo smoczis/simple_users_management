@@ -16,6 +16,8 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository repository;
 
+    public UserServiceImpl() {}
+
     @Autowired
     public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
@@ -54,5 +56,10 @@ public class UserServiceImpl implements UserService {
                 .withMatcher("name", contains().ignoreCase())
                 .withMatcher("surname", contains().ignoreCase());
         return repository.findAll(Example.of(user, matcher));
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        return repository.findByName(name);
     }
 }
