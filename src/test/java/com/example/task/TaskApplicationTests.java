@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class TaskApplicationTests {
 
     @Test
-    public void test() {
+    public void contextLoads() {
 
     }
 }
