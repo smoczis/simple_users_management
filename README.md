@@ -72,6 +72,9 @@ The following guides illustrate how to use some features concretely:
     ```
     
 ### Swagger API documention
-For api documentation and testing visit:
+For building project:
 
-* [localhost:8080:swagger-ui.html](localhost:8080:swagger-ui.html)
+```mvn clean install```
+
+For api documentation and testin visit:
+* [localhost:8080/swagger-ui.html](localhost:8080/swagger-ui.html)
